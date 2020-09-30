@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from 'typeorm';
 import { Process } from './process.entity';
 
 export enum UserRole {
@@ -23,11 +23,17 @@ export class Assignment {
     enum: UserRole,
     default: UserRole.NORMAL,
   })
-  role: UserRole;
+  user_role: UserRole;
 
   @OneToMany(
     type => Process,
     process => process.assignment,
   )
   processes: Process[];
+
+  @OneToOne(
+    type => Assignment,
+    assignment => assignment.next_assignment,
+  )
+  next_assignment: Assignment;
 }

@@ -1,10 +1,32 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  OneToOne,
+} from 'typeorm';
 import { User } from './user.entity';
 import { Process } from './process.entity';
 
-export enum HearingType {
-  LOCAL = 'local',
-  FEDERAL = 'federal',
+export enum HearingName {
+  A = 'Audiencia de Conciliación demanda y excepciones',
+  B = 'Audiencia de Ofrecimiento y Admisión de pruebas',
+  C = 'Audiencia incidental',
+  D = 'Audiencia de Desahogo de Pruebas',
+  E = 'Confesional de la parte actora',
+  F = 'Interrogatorio Libre de la parte actora',
+  G = 'Testimonial de la parte actora',
+  H = 'Inspección de la parte actora',
+  I = 'Pericial de parte actora',
+  J = 'Ratificación de documentos de la parte actora',
+  K = 'Pericial médica',
+  L = 'Toma de muestras',
+  M = 'Confesional de la parte demandada',
+  N = 'Interrogatorio Libre de la parte demandada',
+  O = 'Testimonial de la parte demandada',
+  P = 'Inspección de la parte demandada',
+  Q = 'Pericial de la parte actora',
+  R = 'Ratificación de documentos de la parte demandada',
 }
 
 @Entity()
@@ -12,15 +34,12 @@ export class Hearing {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
-  name: string;
-
   @Column({
     type: 'enum',
-    enum: HearingType,
-    default: HearingType.LOCAL,
+    enum: HearingName,
+    default: HearingName.A,
   })
-  type: HearingType;
+  name: HearingName;
 
   @Column()
   date: Date;
@@ -28,20 +47,11 @@ export class Hearing {
   @Column()
   time: number;
 
-  @Column()
-  number: number;
-
-  @Column()
-  actor: string;
-
-  @Column()
-  company: string;
-
   @ManyToOne(
     type => User,
     user => user.hearings,
   )
-  user: User;
+  lawyer: User;
 
   @OneToOne(
     type => Process,

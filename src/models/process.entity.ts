@@ -10,6 +10,11 @@ import { User } from './user.entity';
 import { Hearing } from './hearing.entity';
 import { Assignment } from './assignment.entity';
 
+export enum ProcessType {
+  LOCAL = 'local',
+  FEDERAL = 'federal',
+}
+
 @Entity()
 export class Process {
   @PrimaryGeneratedColumn('uuid')
@@ -22,13 +27,23 @@ export class Process {
   number: number;
 
   @Column()
-  company: string;
+  actor: string;
+
+  @Column()
+  defendant: string;
+
+  @Column({
+    type: 'enum',
+    enum: ProcessType,
+    default: ProcessType.LOCAL,
+  })
+  type: ProcessType;
 
   @ManyToOne(
     type => User,
     user => user.processes,
   )
-  user: User;
+  current_user: User;
 
   @ManyToOne(
     type => Assignment,

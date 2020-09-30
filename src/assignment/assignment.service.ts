@@ -1,11 +1,11 @@
 import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Notification } from '../models/notification.entity';
+import { Assignment } from '../models/assignment.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
-export class NotificationService {
-  constructor(@InjectRepository(Notification) private repo: Repository<Notification>) {}
+export class AssignmentService {
+  constructor(@InjectRepository(Assignment) private repo: Repository<Assignment>) {}
 
   public async getAll() {
     return await this.repo.find();
@@ -17,8 +17,8 @@ export class NotificationService {
     return response;
   }
 
-  public async create(notification: Notification) {
-    return await this.repo.save(notification).catch(error => {throw new ConflictException(error)});
+  public async create(assignment: Assignment) {
+    return await this.repo.save(assignment).catch(error => {throw new ConflictException(error)});
   }
 
   public async delete(id: string) {
