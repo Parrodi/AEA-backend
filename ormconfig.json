@@ -1,0 +1,14 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "Mojoft87",
+  "database": "aea",
+  "entities": ["dist/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "migrations": ["./migration/*.js"],
+    "cli": {
+        "migrationsDir": "migration"
+    }
+}
