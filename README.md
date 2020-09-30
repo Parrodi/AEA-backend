@@ -30,9 +30,29 @@
 
 ## Installation
 
-```bash
+-Make sure to have the latest version of Node.js and Nest.js globally
+
+-Clone this repository on desired folder 
+
+-On project directory run:
+
 $ npm install
-```
+
+-Create an empty database instance on your preferred DBMS
+
+-Update ormconfig.json on root folder with your database credentials
+
+-Migrate
+
+## Migration
+
+-Make sure migration folder is empty
+
+-On project directory run: 
+  
+  npm run migrate
+
+-After it finishes, run it again
 
 ## Running the app
 
