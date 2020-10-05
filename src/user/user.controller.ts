@@ -39,4 +39,9 @@ export class UserController {
   public async update(@Param('id') id: string, @Body() user: any) {
     return await this.serv.update(id, user);
   }
+
+  @Get('assignments/:id')
+  public async getAssignments(@Param('id') id: string) {
+    return await this.serv.getAssignments(id);
+  }
 }

@@ -25,9 +25,14 @@ export class ProcessController {
   }
 
   @Post()
-  public async post(@Body() process: Process) {
+  public async create(@Body() process: Process) {
     return await this.serv.create(process);
     console.log(process);
+  }
+
+  @Post('assignment-done')
+  public async assigmentDone(@Body('process_id') process_id: string) {
+    return await this.serv.assignmentDone(process_id);
   }
 
   @Delete(':id')

@@ -5,6 +5,7 @@ import {
   ManyToOne,
   OneToMany,
   OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { User } from './user.entity';
 import { Hearing } from './hearing.entity';
@@ -51,9 +52,7 @@ export class Process {
   )
   assignment: Assignment;
 
-  @OneToOne(
-    type => Hearing,
-    hearing => hearing.process,
-  )
+  @OneToOne(type => Hearing)
+  @JoinColumn()
   hearing: Hearing;
 }

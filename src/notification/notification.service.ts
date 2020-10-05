@@ -8,7 +8,7 @@ export class NotificationService {
   constructor(@InjectRepository(Notification) private repo: Repository<Notification>) {}
 
   public async getAll() {
-    return await this.repo.find();
+    return await this.repo.find({ relations: ['user'] });
   }
 
   public async get(id: string) {

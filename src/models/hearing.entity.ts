@@ -6,7 +6,6 @@ import {
   OneToOne,
 } from 'typeorm';
 import { User } from './user.entity';
-import { Process } from './process.entity';
 
 export enum HearingName {
   A = 'Audiencia de Conciliación demanda y excepciones',
@@ -52,10 +51,4 @@ export class Hearing {
     user => user.hearings,
   )
   lawyer: User;
-
-  @OneToOne(
-    type => Process,
-    process => process.hearing,
-  )
-  process: Process;
 }

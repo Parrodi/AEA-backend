@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany, OneToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  OneToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Process } from './process.entity';
 
 export enum UserRole {
@@ -12,7 +19,7 @@ export class Assignment {
   @PrimaryGeneratedColumn('uuid')
   id: number;
 
-  @Column()
+  @Column({ unique: true })
   name: string;
 
   @Column()
@@ -25,15 +32,13 @@ export class Assignment {
   })
   user_role: UserRole;
 
+  @OneToOne(type => Assignment)
+  @JoinColumn()
+  next_assignment: Assignment;
+
   @OneToMany(
     type => Process,
     process => process.assignment,
   )
   processes: Process[];
-
-  @OneToOne(
-    type => Assignment,
-    assignment => assignment.next_assignment,
-  )
-  next_assignment: Assignment;
 }

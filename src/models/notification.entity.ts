@@ -10,9 +10,6 @@ export class Notification {
   message: string;
 
   @Column()
-  user_id: number;
-
-  @Column()
   seen: boolean;
 
   @ManyToOne(
