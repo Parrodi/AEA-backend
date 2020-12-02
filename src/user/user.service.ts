@@ -10,10 +10,17 @@ import { AssignmentService } from '../assignment/assignment.service';
 
 @Injectable()
 export class UserService {
-  constructor(@InjectRepository(User) private repo: Repository<User>,private assignmentService: AssignmentService,) {}
+  constructor(
+    @InjectRepository(User) private repo: Repository<User>,
+    private assignmentService: AssignmentService,
+  ) {}
 
   public async getAll() {
     return await this.repo.find({ relations: ['notifications', 'hearings'] });
+  }
+
+  public async getAllFromRole(role:String) {
+    return await this.repo.find({ relations: ['notifications', 'hearings'] , where: {role: role}});
   }
 
   public async get(id: string) {
@@ -38,8 +45,14 @@ export class UserService {
     return response;
   }
 
-  public async getAssignments(id) {
-    let user = await this.repo.findOne(id, { relations: ['processes'] });
-    console.log(user.processes[0].assignment);
+  public async getProcesses(id) {
+    let user = await this.repo.findOne(id, {
+      relations: ['processes', 'processes.assignment'],
+    });
+    if (user) {
+      return user.processes;
+    }else{
+      throw new NotFoundException("user not found");
+    }
   }
 }

@@ -8,5 +8,6 @@ import { Hearing } from '../models/hearing.entity';
   imports: [TypeOrmModule.forFeature([Hearing])],
   providers: [HearingService],
   controllers: [HearingController],
+  exports: [HearingService]
 })
 export class HearingModule {}

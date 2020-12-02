@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 import { ProcessService } from './process.service';
 import { Process } from '../models/process.entity';
+import { Hearing } from '../models/hearing.entity';
 
 @Controller('processes')
 export class ProcessController {
@@ -33,6 +34,11 @@ export class ProcessController {
   @Post('assignment-done')
   public async assigmentDone(@Body('process_id') process_id: string) {
     return await this.serv.assignmentDone(process_id);
+  }
+
+  @Post('schedule-hearing/:id')
+  public async scheduleHearing(@Param('id') id: string, @Body() hearing: Hearing) {
+    return await this.serv.scheduleHearing(id, hearing);
   }
 
   @Delete(':id')

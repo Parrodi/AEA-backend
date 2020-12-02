@@ -40,6 +40,9 @@ export class Process {
   })
   type: ProcessType;
 
+  @Column({nullable: true})
+  assignment_due_date: Date;
+
   @ManyToOne(
     type => User,
     user => user.processes,

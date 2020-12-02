@@ -11,7 +11,7 @@ export class AssignmentService {
     return await this.repo.find({relations:['next_assignment']});
   }
 
-  public async get(id: string) {
+  public async get(id: any) {
     let response = await this.repo.findOne(id, {relations:['next_assignment']});
     if(response === undefined) throw new NotFoundException();
     return response;

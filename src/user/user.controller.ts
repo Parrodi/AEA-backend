@@ -40,8 +40,8 @@ export class UserController {
     return await this.serv.update(id, user);
   }
 
-  @Get('assignments/:id')
-  public async getAssignments(@Param('id') id: string) {
-    return await this.serv.getAssignments(id);
+  @Get('processes/:id')
+  public async getProcesses(@Param('id') id: string) {
+    return await this.serv.getProcesses(id);
   }
 }

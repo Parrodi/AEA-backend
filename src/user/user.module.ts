@@ -9,5 +9,6 @@ import { AssignmentModule } from '../assignment/assignment.module';
   imports: [TypeOrmModule.forFeature([User]), AssignmentModule],
   providers: [UserService],
   controllers: [UserController],
+  exports: [UserService],
 })
 export class UserModule {}

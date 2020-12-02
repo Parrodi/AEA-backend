@@ -43,8 +43,8 @@ export class Hearing {
   @Column()
   date: Date;
 
-  @Column()
-  time: number;
+  @Column({type: "time"})
+  time: string;
 
   @ManyToOne(
     type => User,
